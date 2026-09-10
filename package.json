@@ -1,0 +1,16 @@
+{
+  "name": "fl-plate-checker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Check Florida personalized plate availability against the official FLHSMV form.",
+  "scripts": {
+    "check": "tsx src/index.ts",
+    "test": "tsx --test src/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

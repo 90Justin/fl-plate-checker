@@ -1,0 +1,6 @@
+# One candidate per line. Blank lines and # comments are ignored.
+GATOR
+NTH
+AYE
+WRY
+RACECAR
