@@ -2,6 +2,7 @@
   "name": "fl-plate-checker",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Check Florida personalized plate availability against the official FLHSMV form.",
   "scripts": {

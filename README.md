@@ -36,3 +36,5 @@ Prints a table and writes the available ones to `available.txt`.
   objectionable content.
 
 `npm test` covers input validation.
+
+MIT.
