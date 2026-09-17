@@ -96,7 +96,10 @@ for (let start = 0; start < queue.length; start += BATCH_SIZE) {
       }
       break;
     } catch (error) {
-      if (!(error instanceof FormError) || attempt >= RETRY_DELAYS_MS.length) throw error;
+      if (!(error instanceof FormError)) throw error;
+      if (attempt >= RETRY_DELAYS_MS.length) {
+        fail(`${error.message}\nGave up after ${RETRY_DELAYS_MS.length} retries.`);
+      }
       console.error(`  ${(error as Error).message} — retrying`);
       form.reset();
       await sleep(RETRY_DELAYS_MS[attempt]!);

@@ -5,6 +5,8 @@ Checks Florida personalized plate availability against the official
 
 ## Use
 
+Needs Node 20+.
+
 ```sh
 npm install
 npm run check                        # reads plates.txt

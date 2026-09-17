@@ -4,6 +4,9 @@
   "private": true,
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "description": "Check Florida personalized plate availability against the official FLHSMV form.",
   "scripts": {
     "check": "tsx src/index.ts",

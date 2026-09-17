@@ -20,7 +20,7 @@ const TOKENS = ["__VIEWSTATE", "__VIEWSTATEGENERATOR", "__EVENTVALIDATION"] as c
 
 export type Status = "AVAILABLE" | "NOT AVAILABLE" | "UNKNOWN";
 
-/** The service answered with something other than the form. */
+/** The request failed, or the service answered with something other than the form. */
 export class FormError extends Error {}
 
 export class PlateForm {
@@ -77,7 +77,14 @@ export class PlateForm {
       headers.referer = ENDPOINT;
     }
 
-    const res = await fetch(ENDPOINT, form ? { method: "POST", headers, body: form } : { headers });
+    let res: Response;
+    try {
+      res = await fetch(ENDPOINT, form ? { method: "POST", headers, body: form } : { headers });
+    } catch (cause) {
+      // Offline, DNS failure, dropped connection. Transient like a 503, so it
+      // becomes a FormError and goes through the same retry path.
+      throw new FormError(`could not reach FLHSMV: ${(cause as Error).message}`, { cause });
+    }
     for (const raw of res.headers.getSetCookie()) {
       const [name, ...rest] = (raw.split(";", 1)[0] ?? "").split("=");
       if (name && rest.length > 0) this.#cookies.set(name.trim(), rest.join("=").trim());
